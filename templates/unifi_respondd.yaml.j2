@@ -12,8 +12,8 @@ ssl_verify: {{ unifi_respondd_controller_verifyssl }}
 multicast_enabled: false
 multicast_address: ff05::2:1001
 multicast_port: 1001
-unicast_address: fe80::68ff:94ff:fe00:1504
-unicast_port: 10001
+unicast_address: {{ unifi_respondd_unicast_address }}
+unicast_port: {{ unifi_respondd_unicast_address }}
 interface: {{ unifi_respondd_interface }}
 verbose: true
 logging_config:

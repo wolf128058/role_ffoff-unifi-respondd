@@ -6,3 +6,5 @@ unifi_respondd_controller_port: 8443
 unifi_respondd_nodelist_url: 'https://map.ffmuc.net/data/meshviewer.json'
 unifi_respondd_interface: 'bat-welt'
 unifi_respondd_controller_verifyssl: 'True'
+unifi_respondd_unicast_address: 'fe80::68ff:94ff:fe00:1504'
+unifi_respondd_unicast_port: 10001
