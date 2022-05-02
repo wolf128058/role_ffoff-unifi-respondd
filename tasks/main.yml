@@ -14,14 +14,14 @@
   become: yes
   git:
     repo: 'https://github.com/freifunkMUC/unifi_respondd'
-    dest: /opt/unifi-respondd/
+    dest: /opt/unifi_respondd/
     force: yes
 
 - name: Create Config
   become: yes
   template:
     src: 'templates/unifi_respondd.yaml.j2'
-    dest: '/opt/unifi-respondd/unifi_respondd.yaml'
+    dest: '/opt/unifi_respondd/unifi_respondd.yaml'
     owner: 'root'
     group: 'root'
     mode: 'u=rw,g=,o='
@@ -30,13 +30,13 @@
   become: yes
   copy:
     remote_src: yes
-    src: /opt/unifi-respondd/unifi_respondd.service.example 
+    src: /opt/unifi_respondd/unifi_respondd.service.example 
     dest: /etc/systemd/system/unifi_respondd.service
     owner: root
     group: root
     mode: u=rw,g=r,o=r
 
-- name: reload systemd and start unifi-respondd
+- name: reload systemd and start unifi_respondd
   become: yes
   systemd:
     name: unifi_respondd
@@ -47,7 +47,7 @@
 - name: Cronjob checking if unifi-respondd service is up and running and restart it if needed
   become: yes
   cron:
-    name: "Restart stuck unifi-respondd"
+    name: "Restart stuck unifi_respondd"
     minute: "*/15"
     hour: "*"
-    job: "systemctl is-active --quiet unifi-respondd || systemctl restart unifi-respondd"
+    job: "systemctl is-active --quiet unifi_respondd || systemctl restart unifi_respondd"
