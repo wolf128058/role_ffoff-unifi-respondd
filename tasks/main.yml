@@ -1,0 +1,53 @@
+---
+- name: Install packages
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    pkg:
+      - git
+      - python3-netifaces
+      - python3-pip
+    state: present
+
+- name: Clone unifi-respondd with git
+  become: yes
+  git:
+    repo: 'https://github.com/freifunkMUC/unifi_respondd'
+    dest: /opt/unifi-respondd/
+    force: yes
+
+- name: Create Config
+  become: yes
+  template:
+    src: 'templates/unifi_respondd.yaml.j2'
+    dest: '/opt/unifi-respondd/unifi_respondd.yaml'
+    owner: 'root'
+    group: 'root'
+    mode: 'u=rw,g=,o='
+
+- name: Copy systemd file
+  become: yes
+  copy:
+    remote_src: yes
+    src: /opt/unifi-respondd/unifi_respondd.service.example 
+    dest: /etc/systemd/system/unifi-respondd.service
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+
+- name: reload systemd and start unifi-respondd
+  become: yes
+  systemd:
+    name: unifi-respondd
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+
+- name: Cronjob checking if unifi-respondd service is up and running and restart it if needed
+  become: yes
+  cron:
+    name: "Restart stuck unifi-respondd"
+    minute: "*/15"
+    hour: "*"
+    job: "systemctl is-active --quiet unifi-respondd || systemctl restart unifi-respondd"
