@@ -4,5 +4,5 @@ unifi_respondd_controller_port: 8443
 # unifi_respondd_controller_user: 'ubnt'
 # unifi_respondd_controller_password: 'ubnt'
 unifi_respondd_nodelist_url: 'https://map.ffmuc.net/data/meshviewer.json'
-unifi_respondd_interface: 'enp1s0'
+unifi_respondd_interface: 'bat-welt'
 unifi_respondd_controller_verifyssl: 'True'
