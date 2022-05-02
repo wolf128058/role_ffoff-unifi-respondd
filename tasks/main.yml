@@ -31,7 +31,7 @@
   copy:
     remote_src: yes
     src: /opt/unifi-respondd/unifi_respondd.service.example 
-    dest: /etc/systemd/system/unifi-respondd.service
+    dest: /etc/systemd/system/unifi_respondd.service
     owner: root
     group: root
     mode: u=rw,g=r,o=r
@@ -39,7 +39,7 @@
 - name: reload systemd and start unifi-respondd
   become: yes
   systemd:
-    name: unifi-respondd
+    name: unifi_respondd
     daemon_reload: yes
     enabled: yes
     state: restarted
