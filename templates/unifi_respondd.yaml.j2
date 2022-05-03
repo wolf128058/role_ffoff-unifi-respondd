@@ -4,8 +4,7 @@ username: {{ unifi_respondd_controller_user }}
 password: {{ unifi_respondd_controller_password }}
 ssid_regex: .*freifunk.*
 offloader_mac:
-    SiteName: 00:00:00:00:00:00
-    SiteName2: 00:00:00:00:00:00
+    {{ unifi_respondd_offloader_name }}: {{ unifi_respondd_offloader_mac }}
 nodelist: {{ unifi_respondd_nodelist_url }}
 version: v5
 ssl_verify: {{ unifi_respondd_controller_verifyssl }}
